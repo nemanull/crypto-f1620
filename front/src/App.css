@@ -1,0 +1,26 @@
+/* General styles for the entire app */
+html, body {
+  height: 100%; 
+  margin: 0;
+}
+
+/* Playground styling */
+.playground {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(65, 105, 225, 0.514);
+  height: 100%;
+}
+
+.app {
+  font-family: Arial, sans-serif;
+  background-color: #acc7e8;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}

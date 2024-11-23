@@ -1,0 +1,170 @@
+/* Container for the entire pack section */
+
+
+.pack-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    width: 100%;
+}
+
+/* Pack styling */
+.pack {
+    width: 220px;
+    height: 380px;
+    background-color: rgb(91, 223, 223);
+    margin-top: 20vh;
+    border-radius: 20px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.7s ease;
+}
+
+.pack_button {
+    all: unset;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    outline: none;
+
+}
+
+.pack:hover {
+    transform: scale(1.2);
+}
+
+/* Card container styling */
+.card-container {
+    display: flex;
+    flex-wrap: wrap; /* Enable wrapping for smaller screens */
+    justify-content: center; /* Center the cards */
+    gap: 20px; /* Add space between cards */
+    width: 100%; /* Ensure it spans the width */
+    /* margin-top: 20vh; */
+}
+
+/* Card styling */
+.card {
+    width: 220px;
+    height: 380px;
+    background-color: #e0f7fa;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 0;
+    transition: transform 0.5s;
+}
+
+.card:hover {
+    transform: scale(1.2);
+}
+
+/* Card header styling */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Card image styling */
+.card-image {
+    width: 100%;
+    height: 120px;
+    background-color: #b2ebf2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed black;
+    margin: 10px 0;
+}
+
+/* Card content styling */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Energy and attack styling */
+.energy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.attack-damage {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Special skill styling */
+.special-skill {
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Button container styling */
+.button-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Reset button styling */
+.refresh_button {
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    background-color: #b2ebf2;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.refresh_button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column; /* Stack cards vertically */
+        align-items: center;
+    }
+
+    .card {
+        width: 90%; 
+    }
+
+    .refresh_button {
+        width: 90%; 
+    }
+
+
+
+}

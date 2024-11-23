@@ -1,0 +1,112 @@
+/* Container for the entire menu including the circle */
+.account-menu-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Circle button for the Pack page */
+.pack-circle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  background-color: #acc7e8;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.pack-circle:hover {
+  background-color: #80a8d8;
+  transform: scale(1.1);
+}
+
+/* Icon inside the circle */
+.pack-icon {
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Account menu styling (same as before) */
+.account-menu {
+  position: relative;
+  display: inline-block;
+  width: 220px;
+  cursor: pointer;
+  background-color: #acc7e8;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar and wallet address display */
+.avatar-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wallet-address {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 220px;
+  background-color: #e3f2fc;
+  border: 1px solid #80a8d8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+
+.dropdown-item a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  font-weight: bold;
+}
+
+.dropdown-item a:hover {
+  background-color: #acc7e8;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Add subtle dividers between items */
+.dropdown-item:not(:last-child) {
+  border-bottom: 1px solid #d3e4f1;
+}
