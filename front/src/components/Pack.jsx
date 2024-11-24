@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import "./Pack.css";
 
-const Pack = () => {
-  const [cards, setCards] = useState([]); // Holds the cards from the opened pack
-  const [packOpened, setPackOpened] = useState(false); // Tracks whether the pack is opened
-  const [errorMessage, setErrorMessage] = useState(""); // Error message for API failures
+const Pack = ({ userAddress, walletType }) => {
+  const [cards, setCards] = useState([]);
+  const [packOpened, setPackOpened] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const packOpen = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/open-pack");
+      const response = await fetch("http://localhost:5000/api/open-pack", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          wallet_address: userAddress,
+          wallet_type: walletType,
+        }),
+      });
 
-      // Handle HTTP errors
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -21,10 +29,10 @@ const Pack = () => {
         throw new Error("Invalid pack data. Expected 5 unique cards.");
       }
 
-      console.log("Received Pack Data:", data); // Debugging log
-      setCards(data); // Save the pack data in state
-      setPackOpened(true); // Indicate the pack has been opened
-      setErrorMessage(""); // Clear any previous errors
+      console.log("Received Pack Data:", data);
+      setCards(data);
+      setPackOpened(true);
+      setErrorMessage("");
     } catch (error) {
       console.error("Error fetching pack:", error);
       setErrorMessage("Failed to load the pack. Please try again.");
@@ -32,9 +40,9 @@ const Pack = () => {
   };
 
   const resetPack = () => {
-    setCards([]); // Clear the cards
-    setPackOpened(false); // Reset the pack state
-    setErrorMessage(""); // Clear error messages
+    setCards([]);
+    setPackOpened(false);
+    setErrorMessage("");
   };
 
   return (
@@ -44,7 +52,7 @@ const Pack = () => {
           <button className="pack_button" onClick={packOpen}>
             Open the pack
           </button>
-          {errorMessage && <p className="error">{errorMessage}</p>} {/* Display error if any */}
+          {errorMessage && <p className="error">{errorMessage}</p>}
         </div>
       ) : (
         <div>
@@ -61,25 +69,25 @@ const Pack = () => {
                 <div className="card-content">
                   <div className="energy">
                     <div>
-                      {card.attacks.attack_1.attack_energy_require}{" "}
-                      {card.attacks.attack_1.attack_name}
+                      {card.attacks?.attack_1?.attack_energy_require || "N/A"}{" "}
+                      {card.attacks?.attack_1?.attack_name || "N/A"}
                     </div>
                     <div className="attack-damage">
-                      {card.attacks.attack_1.attack_damage}
+                      {card.attacks?.attack_1?.attack_damage || "N/A"}
                     </div>
                   </div>
                   <div className="energy">
                     <div>
-                      {card.attacks.attack_2.attack_energy_require}{" "}
-                      {card.attacks.attack_2.attack_name}
+                      {card.attacks?.attack_2?.attack_energy_require || "N/A"}{" "}
+                      {card.attacks?.attack_2?.attack_name || "N/A"}
                     </div>
                     <div className="attack-damage">
-                      {card.attacks.attack_2.attack_damage}
+                      {card.attacks?.attack_2?.attack_damage || "N/A"}
                     </div>
                   </div>
                 </div>
                 <div className="special-skill">
-                  Special Skill: {card.special_skill}
+                  Special Skill: {card.special_skill || "N/A"}
                 </div>
               </div>
             ))}

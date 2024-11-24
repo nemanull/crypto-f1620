@@ -18,7 +18,7 @@ const Authorization = ({ onAuthorized }) => {
       if (response && response.publicKey) {
         console.log("Phantom Wallet connected:", response.publicKey.toString());
         setWalletConnected(true);
-        onAuthorized(response.publicKey.toString());
+        onAuthorized(response.publicKey.toString(), "Phantom"); // Pass walletType
       }
     } catch (error) {
       console.error("Phantom wallet connection failed:", error);
@@ -44,7 +44,7 @@ const Authorization = ({ onAuthorized }) => {
       if (publicKey) {
         console.log("Solflare Wallet connected:", publicKey);
         setWalletConnected(true);
-        onAuthorized(publicKey);
+        onAuthorized(publicKey, "Solflare"); // Pass walletType
       } else {
         throw new Error("Public key not found after connecting.");
       }
@@ -59,7 +59,7 @@ const Authorization = ({ onAuthorized }) => {
     if (window.solana && window.solana.isConnected) {
       console.log("Phantom Wallet already connected.");
       setWalletConnected(true);
-      onAuthorized(window.solana.publicKey.toString());
+      onAuthorized(window.solana.publicKey.toString(), "Phantom"); // Pass walletType
     }
   }, [onAuthorized]);
 

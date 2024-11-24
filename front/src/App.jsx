@@ -11,26 +11,29 @@ import Settings from "./components/Settings/Settings";
 const App = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [userAddress, setUserAddress] = useState("");
+  const [walletType, setWalletType] = useState(""); // Add walletType state
 
-  const handleAuthorization = (address) => {
+  const handleAuthorization = (address, walletType) => {
     setIsAuthorized(true);
-    setUserAddress(address); // Pass the connected wallet address
+    setUserAddress(address);
+    setWalletType(walletType); // Store the wallet type
   };
 
   return (
     <Router>
       <div className="app">
         {!isAuthorized ? (
-          // Show Authorization component until the user connects their wallet
           <Authorization onAuthorized={handleAuthorization} />
         ) : (
-          // Render the main app after successful authorization
           <div>
             <div className="top-bar">
               <AccountMenu userAddress={userAddress} />
             </div>
             <Routes>
-              <Route path="/" element={<Pack />} />
+              <Route
+                path="/"
+                element={<Pack userAddress={userAddress} walletType={walletType} />}
+              />
               <Route path="/profile" element={<Profile />} />
               <Route path="/collection" element={<Collection />} />
               <Route path="/settings" element={<Settings />} />

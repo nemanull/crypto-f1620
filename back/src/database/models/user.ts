@@ -6,13 +6,15 @@ class User extends Model {
   public wallet_address!: string;
   public wallet_type!: "Phantom" | "Solflare" | "Both";
   public packs_opened!: number;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
 }
 
 User.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     wallet_address: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -29,7 +31,8 @@ User.init(
   {
     sequelize,
     modelName: "User",
-    tableName: "users", // Ensure this matches your database table name
+    tableName: "users",
+    timestamps: false, // Disable timestamps
   }
 );
 

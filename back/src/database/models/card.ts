@@ -20,6 +20,11 @@ class Card extends Model {
 
 Card.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     pack_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -75,6 +80,7 @@ Card.init(
     sequelize,
     modelName: "Card",
     tableName: "cards", // Ensure it matches your database table name
+    timestamps: false, // Disable timestamps
   }
 );
 

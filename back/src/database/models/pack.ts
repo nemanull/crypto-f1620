@@ -1,19 +1,7 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../db";
 
-interface PackAttributes {
-  id: number;
-  user_id: number;
-  opened_at?: Date;
-}
-
-// Define creation attributes for Sequelize
-interface PackCreationAttributes extends Optional<PackAttributes, "id"> {}
-
-export class Pack
-  extends Model<PackAttributes, PackCreationAttributes>
-  implements PackAttributes
-{
+class Pack extends Model {
   public id!: number;
   public user_id!: number;
   public opened_at!: Date;
@@ -37,7 +25,9 @@ Pack.init(
   },
   {
     sequelize,
+    modelName: "Pack",
     tableName: "packs",
+    timestamps: false, // Disable timestamps
   }
 );
 
