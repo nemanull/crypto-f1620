@@ -5,4 +5,4 @@
     { "name": "Epic", "probability": 0.04 },
     { "name": "Mythic", "probability": 0.01 },
     { "name": "Legendary", "probability": 0.005 }
-]
+  ]

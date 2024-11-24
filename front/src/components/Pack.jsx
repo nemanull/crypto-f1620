@@ -2,23 +2,39 @@ import React, { useState } from "react";
 import "./Pack.css";
 
 const Pack = () => {
-  const [cards, setCards] = useState([]);
-  const [packOpened, setPackOpened] = useState(false);
+  const [cards, setCards] = useState([]); // Holds the cards from the opened pack
+  const [packOpened, setPackOpened] = useState(false); // Tracks whether the pack is opened
+  const [errorMessage, setErrorMessage] = useState(""); // Error message for API failures
 
   const packOpen = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/open-pack");
+
+      // Handle HTTP errors
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
-      setCards(data);
-      setPackOpened(true);
+
+      if (!Array.isArray(data) || data.length !== 5) {
+        throw new Error("Invalid pack data. Expected 5 unique cards.");
+      }
+
+      console.log("Received Pack Data:", data); // Debugging log
+      setCards(data); // Save the pack data in state
+      setPackOpened(true); // Indicate the pack has been opened
+      setErrorMessage(""); // Clear any previous errors
     } catch (error) {
       console.error("Error fetching pack:", error);
+      setErrorMessage("Failed to load the pack. Please try again.");
     }
   };
 
   const resetPack = () => {
-    setCards([]);
-    setPackOpened(false);
+    setCards([]); // Clear the cards
+    setPackOpened(false); // Reset the pack state
+    setErrorMessage(""); // Clear error messages
   };
 
   return (
@@ -28,6 +44,7 @@ const Pack = () => {
           <button className="pack_button" onClick={packOpen}>
             Open the pack
           </button>
+          {errorMessage && <p className="error">{errorMessage}</p>} {/* Display error if any */}
         </div>
       ) : (
         <div>

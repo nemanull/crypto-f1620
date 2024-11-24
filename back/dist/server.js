@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const teachers_json_1 = __importDefault(require("./cards_data/teachers.json"));
 const rarities_json_1 = __importDefault(require("./cards_data/rarities.json"));
 // Initialize the app and define the port
@@ -12,16 +13,8 @@ const PORT = 5000;
 // Load data from JSON files
 const teachers = teachers_json_1.default;
 const rarities = rarities_json_1.default;
-// // Enable CORS to allow frontend requests
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   if (req.method === "OPTIONS") {
-//     return res.sendStatus(204);
-//   }
-//   next();
-// });
+// Enable CORS to allow frontend requests
+app.use((0, cors_1.default)()); // Enable default CORS for all origins and methods
 // Route: Generate a pack of cards
 app.get("/api/open-pack", (req, res) => {
     const newCards = [];
@@ -29,15 +22,14 @@ app.get("/api/open-pack", (req, res) => {
         // Determine card rarity
         const luck = Math.random();
         let card_rarity = "Common";
-        for (let j = 0; j < rarities.length; j++) {
-            if (luck >= rarities[j].probability) {
-                card_rarity = rarities[j].name;
+        for (const rarity of rarities) {
+            if (luck >= rarity.probability) {
+                card_rarity = rarity.name;
                 break;
             }
         }
         // Select a random teacher
-        const teacherIndex = Math.floor(Math.random() * teachers.length);
-        const teacher = teachers[teacherIndex];
+        const teacher = teachers[Math.floor(Math.random() * teachers.length)];
         // Add the card to the new pack
         newCards.push(Object.assign({ rarity: card_rarity }, teacher));
     }
